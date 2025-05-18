@@ -23,3 +23,5 @@ jobs:
     - name: Run model performance tests
       run: |
         pytest test_model_performance.py -v
+
+        
