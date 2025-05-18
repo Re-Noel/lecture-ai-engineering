@@ -2,12 +2,11 @@ name: ML Pipeline CI
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main, master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
 
@@ -19,9 +18,5 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pandas scikit-learn joblib
-
-    - name: Run model performance tests
-      run: |
-        cd day5/演習3/tests
+        pip install pytest great_expectations pandas
         pytest test_model_performance.py -v
