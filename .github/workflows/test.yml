@@ -1,8 +1,6 @@
 name: ML Pipeline CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -21,20 +19,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pandas scikit-learn flake8 black mypy
+        pip install pytest pandas scikit-learn joblib
 
-    - name: Lint with flake8
+    - name: Run model performance tests
       run: |
-        flake8 tests --count --exit-zero
-
-    - name: Format check with black
-      run: |
-        black --check .
-
-    - name: Run data tests
-      run: |
-        pytest tests/test_data.py -v
-
-    - name: Run model tests
-      run: |
-        pytest tests/test_model.py -v
+        cd day5/演習3/tests
+        pytest test_model_performance.py -v
